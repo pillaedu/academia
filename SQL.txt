@@ -1,0 +1,102 @@
+drop TABLE aluno;
+
+create table aluno(
+id INTEGER PRIMARY KEY auto_increment,
+nome VARCHAR(300),
+email VARCHAR(300),
+idade INTEGER,
+peso NUMERIC,
+altura NUMERIC
+);
+
+drop table aula;
+
+create table aula(
+id INTEGER PRIMARY KEY auto_increment,
+id_professor integer,
+conteudo VARCHAR(200),
+capacidade_alunos INTEGER,
+hora_inicio datatime,
+hora_fim datatime
+);
+ALTER TABLE aula ADD hora_inicio datetime;
+ALTER TABLE aula ADD hora_fim datetime;
+alter TABLE aula add CONSTRAINT id_professor_aula_fk FOREIGN KEY (id_professor) REFERENCES professor(id);
+
+drop table balanco;
+
+create table balanco(
+mes integer primary key,
+saldo integer not null);
+
+drop table lancamento;
+
+create TABLE lancamento(
+id INTEGER PRIMARY KEY auto_increment,
+tipo varchar(200),
+valor NUMERIC not null,
+data date not null,
+comentario varchar(1000)
+);
+
+drop table mensalidade;
+
+create table mensalidade(
+id INTEGER PRIMARY KEY auto_increment,
+data_vencimento date
+mes varchar(150),
+id_aluno INTEGER not null,
+data_pagamento date not null,
+valor NUMERIC not null);
+alter TABLE mensalidade add CONSTRAINT id_aluno_mensalidade_fk FOREIGN KEY (id_aluno) REFERENCES aluno(id);
+
+drop table participacao;
+create table participacao(
+id_aluno INTEGER not null,
+id_aula integer not null,
+id_professor integer not null,
+data date not null);
+alter TABLE participacao add CONSTRAINT id_aluno_fk FOREIGN KEY (id_aluno) REFERENCES aluno(id);
+alter TABLE participacao add CONSTRAINT id_aula_fk FOREIGN KEY (id_aula) REFERENCES aula(id);
+alter TABLE participacao add CONSTRAINT id_professor_fk FOREIGN KEY (id_professor) REFERENCES professor(id);
+
+drop table professor;
+create table professor(
+id INTEGER PRIMARY KEY auto_increment,
+nome VARCHAR(300) not null
+);
+
+drop table medicoes;
+create table medicoes(
+id INTEGER PRIMARY	 KEY auto_increment,
+data date not null,
+id_aluno INTEGER not null,
+peso NUMERIC not null,
+altura numeric not null);
+ALTER TABLE medicoes ADD CONSTRAINT id_aluno_medicoes_fk FOREIGN KEY ( id_aluno ) REFERENCES aluno ( id ) ;
+
+
+create table meses(
+id INTEGER PRIMARY KEY auto_increment,
+nome varchar(40) not null
+);
+
+
+
+SELECT COUNT(*) as TOTAL, extract(month from DATA_STATUS_ORC) AS MES, 
+case extract(month from DATA_STATUS_ORC) 
+when 1 then 'Janeiro' 
+when 2 then 'Fevereiro' 
+when 3 then 'Março' 
+when 4 then 'Abril' 
+when 5 then 'Maio' 
+when 6 then 'Junho' 
+when 7 then 'Julho' 
+when 8 then 'Agosto' 
+when 9 then 'Setembro' 
+when 10 then 'Outubro' 
+when 11 then 'Novembro' 
+when 12 then 'Dezembro' 
+end AS MESDESC FROM ORC 
+WHERE extract(year from DATA_STATUS_ORC) = 2009 
+GROUP BY MES 
