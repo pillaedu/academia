@@ -21,7 +21,7 @@ public class AulaDAO {
 
         int incluido = 0;
         try {
-            Connection con = br.edu.DAO.AppConnection.getConnection();
+            Connection con = br.edu.DAO.AppConnection.getConnection();//comentario para testar git
             String insert = "insert into aula (id_professor, conteudo, capacidade_alunos, hora_inicio,hora_fim)"
                     + "values (?,?,?, STR_TO_DATE(?,'%H:%i:%s'),STR_TO_DATE(?,'%H:%i:%s'));";
 
