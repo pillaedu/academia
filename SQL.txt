@@ -24,11 +24,9 @@ ALTER TABLE aula ADD hora_inicio datetime;
 ALTER TABLE aula ADD hora_fim datetime;
 alter TABLE aula add CONSTRAINT id_professor_aula_fk FOREIGN KEY (id_professor) REFERENCES professor(id);
 
-drop table balanco;
 
-create table balanco(
-mes integer primary key,
-saldo integer not null);
+
+
 
 drop table lancamento;
 
@@ -39,6 +37,10 @@ valor NUMERIC not null,
 data date not null,
 comentario varchar(1000)
 );
+
+
+15:20:41	create trigger lancamento before insert on mensalidade m for each row begin insert into balanco_ontime (id_origem,natureza,valor,data) values (new.id,1,new.valor,curdate())  end	Error Code: 1064. You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'm for each row begin insert into balanco_ontime (id_origem,natureza,valor,data) ' at line 2	0.000 sec
+
 
 drop table mensalidade;
 
@@ -95,20 +97,26 @@ nome varchar(40) not null
 
 
 
-SELECT COUNT(*) as TOTAL, extract(month from DATA_STATUS_ORC) AS MES, 
-case extract(month from DATA_STATUS_ORC) 
-when 1 then 'Janeiro' 
-when 2 then 'Fevereiro' 
-when 3 then 'Março' 
-when 4 then 'Abril' 
-when 5 then 'Maio' 
-when 6 then 'Junho' 
-when 7 then 'Julho' 
-when 8 then 'Agosto' 
-when 9 then 'Setembro' 
-when 10 then 'Outubro' 
-when 11 then 'Novembro' 
-when 12 then 'Dezembro' 
-end AS MESDESC FROM ORC 
-WHERE extract(year from DATA_STATUS_ORC) = 2009 
-GROUP BY MES 
+
+____________________________________________________
+implementar isso a cada lancamento ou recebimento de mensalidade
+
+drop table balanco_ontime;
+
+create table balanco_ontime(
+id INTEGER PRIMARY KEY auto_increment,
+id_origem integer,
+natureza boolean,
+valor integer,
+data date
+);
+
+
+
+drop table balanco_mensal;
+
+create table balanco_mensal(
+mes integer primary key,
+entradas integer not null,
+saidas integer not null
+);

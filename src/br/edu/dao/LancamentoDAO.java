@@ -14,12 +14,11 @@ public class LancamentoDAO {
 
         try {
             String insert = "insert into lancamento(tipo,valor,data)"
-                    + "values (?,?,?)";
+                    + "values (?,?,curdate())";
             Connection con = AppConnection.getConnection();
             PreparedStatement ps = (PreparedStatement) con.prepareStatement(insert);
             ps.setString(1, l.getTipo());
             ps.setFloat(2, l.getValor());
-            ps.setDate(3, (Date) l.getData());
 
             int resultado = ps.executeUpdate();
             if (resultado != 0) {
@@ -31,5 +30,4 @@ public class LancamentoDAO {
             ExibeMensagens.mostaerro("Erro ao inserir lancamento", e);
         }
     }
-
 }

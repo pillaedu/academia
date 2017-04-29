@@ -141,7 +141,7 @@ public class CadastroAluno extends javax.swing.JFrame {
         });
 
         jLabelMes.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabelMes.setText("Mes Vencimento");
+        jLabelMes.setText("Dia Vencimento");
 
         javax.swing.GroupLayout jPanelAlunosLayout = new javax.swing.GroupLayout(jPanelAlunos);
         jPanelAlunos.setLayout(jPanelAlunosLayout);

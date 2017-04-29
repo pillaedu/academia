@@ -48,16 +48,10 @@ public class Aluno {
 		this.altura = altura;
 	}
 
-    /**
-     * @return the mes
-     */
     public int getMes() {
         return mes;
     }
 
-    /**
-     * @param mes the mes to set
-     */
     public void setMes(int mes) {
         this.mes = mes;
     }

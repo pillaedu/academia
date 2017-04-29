@@ -154,6 +154,7 @@ public class AlunoDAO {
             ExibeMensagens.mostaerro("Erro ao excluir aluno", e);
         }
     }
+  
     public int inseri_mes(int mes){
         int id = retornaultimo();
         int inserido = 0;
@@ -177,4 +178,39 @@ public class AlunoDAO {
         
         return inserido;
     }
+    
+    public List<Aluno> listardevedores(String mes) {
+        
+        ArrayList<Aluno> list = new ArrayList<Aluno>();
+        try {
+         Connection con = AppConnection.getConnection();
+
+            Statement stmt = (Statement) con.createStatement();
+            ResultSet rs = stmt.executeQuery(
+                    "select a.id as id,a.nome as nome,a.email as email" 
+                    +" from aluno a, mensalidade m, vencimento_aluno v"
+                    +" where 'janeiro' not in (select mes from mensalidade where id_aluno = a.id)"
+                    +" and a.mes <  (Select Month(now()));");
+            while (rs.next()) {
+                Aluno a = new Aluno();
+                a.setId(rs.getInt("id"));
+                a.setNome(rs.getString("nome"));
+                a.setEmail(rs.getString("email"));
+        
+                list.add(a);
+            }
+
+        } catch (SQLException e) {
+            ExibeMensagens.mostaerro("Erro ao buscar devedores", e);
+        }
+
+        if (list.isEmpty()) {
+            ExibeMensagens.mostramensagem("Não ha devedores para o mes de "+ mes);
+            return null;
+        } else {
+            return list;
+        }
+
+    }
+
 }

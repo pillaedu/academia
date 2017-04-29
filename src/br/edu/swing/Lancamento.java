@@ -140,7 +140,7 @@ public class Lancamento extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldMatriculaActionPerformed
 
     private void jButtonGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGravarActionPerformed
-
+          
     }//GEN-LAST:event_jButtonGravarActionPerformed
 
     private void jComboTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboTipoActionPerformed
