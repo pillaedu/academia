@@ -77,5 +77,58 @@ public class AulaDAO {
         }
 
     }
+    public void excluir(int id) {
+        
+        try {
+            String delete = "delete from aula "
+                    + "where id = ?;";
+            Connection con = AppConnection.getConnection();
+            try (PreparedStatement ps = (PreparedStatement) con.prepareStatement(delete)) {
+                ps.setInt(1, id);
+                int excluidos = ps.executeUpdate();
+                if (excluidos > 0) {
+                    ExibeMensagens.mensagemok("Aula excluido com sucesso");
+                } else {
+                    ExibeMensagens.mostramensagem("Não ha aula com esse id");
+                }
+            }
+            con.close();
 
+        } catch (SQLException e) {
+            ExibeMensagens.mostaerro("Erro ao excluir Aula", e);
+        }
+    }
+    
+    
+    public Aula buscar(int id) {
+        Aula a = new Aula();
+        
+        try {
+            Connection con = AppConnection.getConnection();
+            Statement stmt = (Statement) con.createStatement();
+            ResultSet rs = stmt.executeQuery(
+                    "select a.id as id, p.nome as nome_professor, conteudo, capacidade_alunos, hora_inicio, hora_fim" 
+                    +" from aula a , professor p"
+                    +" where p.id = "+ id+ ";");
+            while (rs.next()) {
+
+                a.setId(rs.getInt("id"));
+                a.setNome_professor(rs.getString("nome_professor"));
+                a.setConteudo(rs.getString("conteudo"));
+                a.setCapacidade_alunos(rs.getInt("capacidade_alunos"));
+                a.setHora_inicio(rs.getString("hora_inicio"));
+                a.setHora_fim(rs.getString("hora_fim"));
+            }
+
+        } catch (SQLException e) {
+            ExibeMensagens.mostaerro("Erro ao Buscao Aula", e);
+        }
+        if (a.getId() > 0) {
+            return a;
+        } else {
+            ExibeMensagens.mostramensagem("Não ha Aula com id " + id);
+            return null;
+        }
+
+    }
 }

@@ -8,6 +8,7 @@ package br.edu.swing;
 
 import br.edu.entity.*;
 import br.edu.DAO.AlunoDAO;
+import br.edu.DAO.AulaDAO;
 import br.edu.dao.ProfessorDAO;
 import javax.swing.JOptionPane;
 //import br.edu.dao.ProfessorDAO;
@@ -67,10 +68,10 @@ public class CadastroExcluir extends javax.swing.JFrame {
         jTextFiedAulaid = new javax.swing.JTextField();
         jLabelMatricula1 = new javax.swing.JLabel();
         jButtonAulaPesq = new javax.swing.JButton();
-        jTextFieldNomeProf = new javax.swing.JTextField();
+        jTextFieldAulaNomeProf = new javax.swing.JTextField();
         jLabelNome1 = new javax.swing.JLabel();
         jLabelNome2 = new javax.swing.JLabel();
-        jTextFieldConteudo = new javax.swing.JTextField();
+        jTextFieldAulaConteudo = new javax.swing.JTextField();
         jButtonAulaListar = new javax.swing.JButton();
         jButtonAulaExcluir1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -372,9 +373,9 @@ public class CadastroExcluir extends javax.swing.JFrame {
             }
         });
 
-        jTextFieldNomeProf.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldAulaNomeProf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldNomeProfActionPerformed(evt);
+                jTextFieldAulaNomeProfActionPerformed(evt);
             }
         });
 
@@ -384,9 +385,9 @@ public class CadastroExcluir extends javax.swing.JFrame {
         jLabelNome2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabelNome2.setText("Conteúdo");
 
-        jTextFieldConteudo.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldAulaConteudo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldConteudoActionPerformed(evt);
+                jTextFieldAulaConteudoActionPerformed(evt);
             }
         });
 
@@ -418,14 +419,14 @@ public class CadastroExcluir extends javax.swing.JFrame {
                             .addGroup(jPanelAulasLayout.createSequentialGroup()
                                 .addComponent(jLabelNome2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldConteudo, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jTextFieldAulaConteudo, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanelAulasLayout.createSequentialGroup()
                                 .addGroup(jPanelAulasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabelMatricula1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabelNome1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanelAulasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextFieldNomeProf, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextFieldAulaNomeProf, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanelAulasLayout.createSequentialGroup()
                                         .addComponent(jTextFiedAulaid, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
@@ -448,11 +449,11 @@ public class CadastroExcluir extends javax.swing.JFrame {
                     .addComponent(jButtonAulaPesq, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelAulasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldNomeProf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldAulaNomeProf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelNome1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelAulasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldConteudo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldAulaConteudo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelNome2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(58, 58, 58)
                 .addGroup(jPanelAulasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -603,22 +604,20 @@ public class CadastroExcluir extends javax.swing.JFrame {
         
         br.edu.DAO.AulaDAO consulta = new br.edu.DAO.AulaDAO();
         Aula ret = new Aula();
-       
-        /*
-        falta fazer o metodo no DAO pra aula
+        ret = consulta.buscar(Integer.parseInt(jTextFiedAulaid.getText()));
         
-        ret = consulta.buscar(Integer.parseInt(jTextFieldProfMatricula.getText()));
-        jTextFieldProfNome.setText(ret.getNome()); 
-        */
+        jTextFieldAulaNomeProf.setText(ret.getNome_professor());
+        jTextFieldAulaConteudo.setText(ret.getConteudo());
+        
     }//GEN-LAST:event_jButtonAulaPesqActionPerformed
 
-    private void jTextFieldNomeProfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomeProfActionPerformed
+    private void jTextFieldAulaNomeProfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldAulaNomeProfActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldNomeProfActionPerformed
+    }//GEN-LAST:event_jTextFieldAulaNomeProfActionPerformed
 
-    private void jTextFieldConteudoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldConteudoActionPerformed
+    private void jTextFieldAulaConteudoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldAulaConteudoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldConteudoActionPerformed
+    }//GEN-LAST:event_jTextFieldAulaConteudoActionPerformed
 
     private void jButtonAulaListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAulaListarActionPerformed
         // TODO add your handling code here:
@@ -629,6 +628,8 @@ public class CadastroExcluir extends javax.swing.JFrame {
 
     private void jButtonAulaExcluir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAulaExcluir1ActionPerformed
         // TODO add your handling code here:
+        AulaDAO dao = new AulaDAO();
+        dao.excluir(Integer.parseInt(jTextFiedAulaid.getText()));        
     }//GEN-LAST:event_jButtonAulaExcluir1ActionPerformed
 
     /**
@@ -700,11 +701,11 @@ public class CadastroExcluir extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelProfessores;
     private javax.swing.JTabbedPane jTabbedPaneExcluir;
     private javax.swing.JTextField jTextFiedAulaid;
-    private javax.swing.JTextField jTextFieldConteudo;
+    private javax.swing.JTextField jTextFieldAulaConteudo;
+    private javax.swing.JTextField jTextFieldAulaNomeProf;
     private javax.swing.JTextField jTextFieldEmail;
     private javax.swing.JTextField jTextFieldMatricula;
     private javax.swing.JTextField jTextFieldNome;
-    private javax.swing.JTextField jTextFieldNomeProf;
     private javax.swing.JTextField jTextFieldProfMatricula;
     private javax.swing.JTextField jTextFieldProfNome;
     // End of variables declaration//GEN-END:variables

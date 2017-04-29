@@ -59,6 +59,8 @@ public class CadastroAluno extends javax.swing.JFrame {
         jLabelIdade = new javax.swing.JLabel();
         jButtonGravar = new javax.swing.JButton();
         jFormattedTextFieldIdade = new javax.swing.JFormattedTextField();
+        jFormattedTextFieldMes = new javax.swing.JFormattedTextField();
+        jLabelMes = new javax.swing.JLabel();
         jPanelProfessores = new javax.swing.JPanel();
         jLabelIconeProfessorres = new javax.swing.JLabel();
         jPanelProfessor = new javax.swing.JPanel();
@@ -132,6 +134,15 @@ public class CadastroAluno extends javax.swing.JFrame {
             }
         });
 
+        jFormattedTextFieldMes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFormattedTextFieldMesActionPerformed(evt);
+            }
+        });
+
+        jLabelMes.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabelMes.setText("Mes Vencimento");
+
         javax.swing.GroupLayout jPanelAlunosLayout = new javax.swing.GroupLayout(jPanelAlunos);
         jPanelAlunos.setLayout(jPanelAlunosLayout);
         jPanelAlunosLayout.setHorizontalGroup(
@@ -143,7 +154,7 @@ public class CadastroAluno extends javax.swing.JFrame {
                         .addComponent(jLabelFundoAlunos))
                     .addGroup(jPanelAlunosLayout.createSequentialGroup()
                         .addGap(64, 64, 64)
-                        .addGroup(jPanelAlunosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanelAlunosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelAlunosLayout.createSequentialGroup()
                                 .addComponent(jLabelEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -151,12 +162,17 @@ public class CadastroAluno extends javax.swing.JFrame {
                                     .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanelAlunosLayout.createSequentialGroup()
-                                .addComponent(jLabelIdade, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jFormattedTextFieldIdade, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanelAlunosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanelAlunosLayout.createSequentialGroup()
+                                        .addComponent(jLabelMes, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jFormattedTextFieldMes, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanelAlunosLayout.createSequentialGroup()
+                                        .addComponent(jLabelIdade, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jFormattedTextFieldIdade, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(8, 8, 8)
-                                .addComponent(jButtonGravar, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(jButtonGravar, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 131, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanelAlunosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,7 +199,11 @@ public class CadastroAluno extends javax.swing.JFrame {
                         .addGap(36, 36, 36)
                         .addComponent(jLabelFundoAlunos))
                     .addGroup(jPanelAlunosLayout.createSequentialGroup()
-                        .addGap(88, 88, 88)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanelAlunosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelMes, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jFormattedTextFieldMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(49, 49, 49)
                         .addComponent(jButtonGravar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
             .addGroup(jPanelAlunosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -466,12 +486,8 @@ public class CadastroAluno extends javax.swing.JFrame {
         a.setNome(jTextFieldNome.getText());
         a.setEmail(jTextFieldNome.getText());
         a.setIdade(Integer.parseInt(jFormattedTextFieldIdade.getText()));
-        //a.setPeso(Float.parseFloat(jFormattedTextFieldIdade.getText()));
-        //a.setAltura(Float.parseFloat(jFormattedTextFieldIdade.getText()));
-        
+        a.setMes(Integer.parseInt(jFormattedTextFieldMes.getText()));
         adao.inserir(a);
-        //Medicao m = new Medicao();
-        //m.setVisible(true);
         Component comp = SwingUtilities.getRoot(this);
         ((Window) comp).dispose();
         
@@ -567,6 +583,10 @@ public class CadastroAluno extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jFormattedTextHora_fimActionPerformed
 
+    private void jFormattedTextFieldMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldMesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFormattedTextFieldMesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -611,6 +631,7 @@ public class CadastroAluno extends javax.swing.JFrame {
     private javax.swing.JButton jButtonProfGravar;
     private javax.swing.JFormattedTextField jFormattedTextFieldHora_inicio;
     private javax.swing.JFormattedTextField jFormattedTextFieldIdade;
+    private javax.swing.JFormattedTextField jFormattedTextFieldMes;
     private javax.swing.JFormattedTextField jFormattedTextHora_fim;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelAulaCapacidade;
@@ -621,6 +642,7 @@ public class CadastroAluno extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelFundoAlunos;
     private javax.swing.JLabel jLabelIconeProfessorres;
     private javax.swing.JLabel jLabelIdade;
+    private javax.swing.JLabel jLabelMes;
     private javax.swing.JLabel jLabelNome;
     private javax.swing.JLabel jLabelNome1;
     private javax.swing.JLabel jLabelProfFundo;

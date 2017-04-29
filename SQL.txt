@@ -8,6 +8,7 @@ idade INTEGER,
 peso NUMERIC,
 altura NUMERIC
 );
+ALTER TABLE aluno ADD mes integer;
 
 drop table aula;
 
@@ -43,12 +44,23 @@ drop table mensalidade;
 
 create table mensalidade(
 id INTEGER PRIMARY KEY auto_increment,
-data_vencimento date
 mes varchar(150),
 id_aluno INTEGER not null,
 data_pagamento date not null,
 valor NUMERIC not null);
 alter TABLE mensalidade add CONSTRAINT id_aluno_mensalidade_fk FOREIGN KEY (id_aluno) REFERENCES aluno(id);
+
+drop table vencimento_aluno;
+
+create table vencimento_aluno(
+
+id integer primary key auto_increment,
+
+id_aluno integer not null,
+
+mes_vencimento integer not null);
+
+alter table vencimento_aluno add constraint id_aluno_fk foreign key (id_aluno) references aluno(id);
 
 drop table participacao;
 create table participacao(

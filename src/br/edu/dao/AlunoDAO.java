@@ -19,12 +19,10 @@ public class AlunoDAO {
     //insere um aluno no banco
 
     public void inserir(Aluno a) {
-        
-        
         try {
             Connection con = AppConnection.getConnection();
-            String insert = "insert into aluno (nome,email,idade,peso,altura)"
-                    + "valueS (?,?,?,?,?)";
+            String insert = "insert into aluno (nome,email,idade,peso,altura,mes)"
+                    + "valueS (?,?,?,?,?,?)";
 
             try (PreparedStatement ps = (PreparedStatement) con.prepareStatement(insert)) {
                 ps.setString(1, a.getNome());
@@ -32,9 +30,11 @@ public class AlunoDAO {
                 ps.setInt(3, a.getIdade());
                 ps.setFloat(4, a.getPeso());
                 ps.setFloat(5, a.getAltura());
-
+                ps.setInt(6,a.getMes());
+              
                 int incluido = ps.executeUpdate();
-                if (incluido > 0) {
+                int mes = inseri_mes(a.getMes());
+                if (incluido > 0 && mes>0) {
                     ExibeMensagens.mostramensagemaluno(retornaultimo());
                 }
             }
@@ -154,5 +154,27 @@ public class AlunoDAO {
             ExibeMensagens.mostaerro("Erro ao excluir aluno", e);
         }
     }
+    public int inseri_mes(int mes){
+        int id = retornaultimo();
+        int inserido = 0;
+        try {
+            String insert = "insert into vencimento_aluno (id_aluno, mes_vencimento)"
+                   + " values (?,?);";
+            
+            Connection con = AppConnection.getConnection();            
+            
+            try (PreparedStatement ps = (PreparedStatement) con.prepareStatement(insert)) {
+                ps.setInt(1, id);
+                ps.setInt(2, mes);
+                
+                inserido = ps.executeUpdate();
+            }
+            con.close();
 
+        } catch (SQLException e) {
+            ExibeMensagens.mostaerro("Erro ao excluir aluno", e);
+        }
+        
+        return inserido;
+    }
 }

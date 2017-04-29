@@ -85,10 +85,19 @@
                                           <Component id="jTextFieldEmail" min="-2" pref="337" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <Group type="102" attributes="0">
-                                      <Component id="jLabelIdade" min="-2" pref="99" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jFormattedTextFieldIdade" min="-2" pref="64" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Component id="jLabelMes" min="-2" pref="99" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="jFormattedTextFieldMes" min="-2" pref="64" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" attributes="0">
+                                              <Component id="jLabelIdade" min="-2" pref="99" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="jFormattedTextFieldIdade" min="-2" pref="64" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
                                       <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                                       <Component id="jButtonGravar" min="-2" pref="157" max="-2" attributes="0"/>
                                   </Group>
@@ -128,7 +137,12 @@
                               <Component id="jLabelFundoAlunos" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jLabelMes" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                                  <Component id="jFormattedTextFieldMes" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                               <Component id="jButtonGravar" min="-2" pref="34" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -199,6 +213,19 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jFormattedTextFieldIdadeActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldMes">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jFormattedTextFieldMesActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabelMes">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="12" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Mes Vencimento"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>

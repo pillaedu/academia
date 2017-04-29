@@ -3,7 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/EduardoPatricia/Documents/NetBeansProjects/Academia/src/br/edu/dao/AulaDAO.java</file>
+            <file>file:/C:/Users/EduardoPatricia/Documents/NetBeansProjects/Academia/src/br/edu/swing/CadastroAluno.java</file>
+            <file>file:/C:/Users/EduardoPatricia/Documents/NetBeansProjects/Academia/src/br/edu/entity/Aluno.java</file>
+            <file>file:/C:/Users/EduardoPatricia/Documents/NetBeansProjects/Academia/src/br/edu/dao/AlunoDAO.java</file>
         </group>
     </open-files>
 </project-private>

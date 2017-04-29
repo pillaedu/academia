@@ -7,6 +7,7 @@ public class Aluno {
 	private int idade;
 	private float peso;
 	private float altura;
+        private int mes;
         
         
         
@@ -46,5 +47,19 @@ public class Aluno {
 	public void setAltura(float altura) {
 		this.altura = altura;
 	}
+
+    /**
+     * @return the mes
+     */
+    public int getMes() {
+        return mes;
+    }
+
+    /**
+     * @param mes the mes to set
+     */
+    public void setMes(int mes) {
+        this.mes = mes;
+    }
 
 }
