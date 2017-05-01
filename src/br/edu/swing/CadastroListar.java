@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-//import br.edu.dao.ProfessorDAO;
+import br.edu.controller.AlunoC;
 
 
 /**
@@ -242,16 +242,15 @@ public class CadastroListar extends javax.swing.JFrame {
 
     
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        // TODO add your handling code here:
+
         //carrega a tabela de alunos
-        Aluno a = new Aluno();
-        AlunoDAO dao = new AlunoDAO();
+        AlunoC c = new AlunoC();
         
         DefaultTableModel val = (DefaultTableModel) jTableAlunos.getModel();
-        List<Aluno> list = new ArrayList<Aluno>();
-        list = dao.listartodos();
+        List<AlunoM> list = new ArrayList<AlunoM>();
+        list = c.listartodos();
         
-        for (Aluno list1 : list) {
+        for (AlunoM list1 : list) {
            int i = 0;
             val.addRow(new Object[] {list1.getId(),list1.getNome(),list1.getEmail(),list1.getIdade()});
           if (val.getValueAt(i, 0) == null) 

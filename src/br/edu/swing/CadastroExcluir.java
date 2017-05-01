@@ -9,6 +9,7 @@ package br.edu.swing;
 import br.edu.entity.*;
 import br.edu.DAO.AlunoDAO;
 import br.edu.DAO.AulaDAO;
+import br.edu.controller.AlunoC;
 import br.edu.dao.ProfessorDAO;
 import javax.swing.JOptionPane;
 //import br.edu.dao.ProfessorDAO;
@@ -44,13 +45,7 @@ public class CadastroExcluir extends javax.swing.JFrame {
         jLabelNome = new javax.swing.JLabel();
         jTextFieldNome = new javax.swing.JTextField();
         jTextFieldEmail = new javax.swing.JTextField();
-        jLabelIdade = new javax.swing.JLabel();
-        jLabelPeso = new javax.swing.JLabel();
-        jLabelAltura = new javax.swing.JLabel();
         jButtonLista = new javax.swing.JButton();
-        jFormattedTextFieldIdade = new javax.swing.JFormattedTextField();
-        jFormattedTextFieldPeso = new javax.swing.JFormattedTextField();
-        jFormattedTextFieldAltura = new javax.swing.JFormattedTextField();
         jLabelMatricula = new javax.swing.JLabel();
         jTextFieldMatricula = new javax.swing.JTextField();
         jButtonExcluir = new javax.swing.JButton();
@@ -108,38 +103,11 @@ public class CadastroExcluir extends javax.swing.JFrame {
             }
         });
 
-        jLabelIdade.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabelIdade.setText("Idade");
-
-        jLabelPeso.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabelPeso.setText("Peso");
-
-        jLabelAltura.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabelAltura.setText("Altura");
-
         jButtonLista.setText("Ir para Listagem");
         jButtonLista.setToolTipText("Ir para listagem de Cadastrados");
         jButtonLista.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonListaActionPerformed(evt);
-            }
-        });
-
-        jFormattedTextFieldIdade.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFormattedTextFieldIdadeActionPerformed(evt);
-            }
-        });
-
-        jFormattedTextFieldPeso.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFormattedTextFieldPesoActionPerformed(evt);
-            }
-        });
-
-        jFormattedTextFieldAltura.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFormattedTextFieldAlturaActionPerformed(evt);
             }
         });
 
@@ -174,7 +142,7 @@ public class CadastroExcluir extends javax.swing.JFrame {
             jPanelAlunosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelAlunosLayout.createSequentialGroup()
                 .addGap(100, 100, 100)
-                .addGroup(jPanelAlunosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanelAlunosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelAlunosLayout.createSequentialGroup()
                         .addGroup(jPanelAlunosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabelEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -189,26 +157,11 @@ public class CadastroExcluir extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(jButtonPesquisar))))
                     .addGroup(jPanelAlunosLayout.createSequentialGroup()
-                        .addComponent(jLabelIdade, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanelAlunosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanelAlunosLayout.createSequentialGroup()
-                                .addComponent(jFormattedTextFieldIdade, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabelPeso, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jButtonLista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jFormattedTextFieldPeso, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabelAltura, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jFormattedTextFieldAltura, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(102, Short.MAX_VALUE))
-            .addGroup(jPanelAlunosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAlunosLayout.createSequentialGroup()
-                    .addContainerGap(400, Short.MAX_VALUE)
-                    .addComponent(jButtonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(124, 124, 124)))
+                        .addGap(103, 103, 103)
+                        .addComponent(jButtonLista, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(64, 64, 64)
+                        .addComponent(jButtonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(105, Short.MAX_VALUE))
         );
         jPanelAlunosLayout.setVerticalGroup(
             jPanelAlunosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -227,22 +180,11 @@ public class CadastroExcluir extends javax.swing.JFrame {
                 .addGroup(jPanelAlunosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(98, 98, 98)
                 .addGroup(jPanelAlunosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelIdade, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelPeso, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelAltura, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextFieldIdade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextFieldPeso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextFieldAltura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(57, 57, 57)
-                .addComponent(jButtonLista, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(80, Short.MAX_VALUE))
-            .addGroup(jPanelAlunosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAlunosLayout.createSequentialGroup()
-                    .addContainerGap(288, Short.MAX_VALUE)
-                    .addComponent(jButtonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(80, 80, 80)))
+                    .addComponent(jButtonLista, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(84, Short.MAX_VALUE))
         );
 
         jTabbedPaneExcluir.addTab("Alunos", null, jPanelAlunos, "Inserir novo aluno no cadastro");
@@ -479,13 +421,6 @@ public class CadastroExcluir extends javax.swing.JFrame {
 
     private void jButtonListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListaActionPerformed
 
-        a.setNome(jTextFieldNome.getText());
-        a.setEmail(jTextFieldNome.getText());
-        a.setIdade(Integer.parseInt(jFormattedTextFieldIdade.getText()));
-        a.setPeso(Float.parseFloat(jFormattedTextFieldIdade.getText()));
-        a.setAltura(Float.parseFloat(jFormattedTextFieldIdade.getText()));
-        
-        adao.inserir(a);
 
     }//GEN-LAST:event_jButtonListaActionPerformed
 
@@ -496,18 +431,6 @@ public class CadastroExcluir extends javax.swing.JFrame {
     private void jTextFieldNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldNomeActionPerformed
-
-    private void jFormattedTextFieldIdadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldIdadeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jFormattedTextFieldIdadeActionPerformed
-
-    private void jFormattedTextFieldPesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldPesoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jFormattedTextFieldPesoActionPerformed
-
-    private void jFormattedTextFieldAlturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldAlturaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jFormattedTextFieldAlturaActionPerformed
 
     private void jTextFieldProfNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldProfNomeActionPerformed
         // TODO add your handling code here:
@@ -528,14 +451,20 @@ public class CadastroExcluir extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldMatriculaActionPerformed
 
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
-        // TODO add your handling code here:
+       
+        //exclui aluno
         if (jTextFieldMatricula.getText().isEmpty()){
             MensagemErro m = new MensagemErro();
             MensagemErro.jLabelErro.setText("Preencha a Matricula");
             m.setVisible(true);
         }
-        AlunoDAO dao = new AlunoDAO();
-        dao.excluir(Integer.parseInt(jTextFieldMatricula.getText()));
+        AlunoC c = new AlunoC();
+        c.excluiraluno(Integer.parseInt(jTextFieldMatricula.getText()));
+        
+        //limpa campos
+        jTextFieldMatricula.setText(null);
+        jTextFieldNome.setText(null);
+        jTextFieldEmail.setText(null);
     }//GEN-LAST:event_jButtonExcluirActionPerformed
 
     private void jButtonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarActionPerformed
@@ -546,14 +475,14 @@ public class CadastroExcluir extends javax.swing.JFrame {
             m.setVisible(true);
         }
         
-        AlunoDAO dao = new AlunoDAO();
-        Aluno ret = new Aluno();
-        ret = dao.buscar(Integer.parseInt(jTextFieldMatricula.getText()));
-        jTextFieldNome.setText(ret.getNome());
-        jTextFieldEmail.setText(ret.getEmail());
-       jFormattedTextFieldAltura.setText(String.valueOf(ret.getAltura()));
-       jFormattedTextFieldPeso.setText(String.valueOf(ret.getPeso()));
-       jFormattedTextFieldIdade.setText(String.valueOf(ret.getIdade()));
+        br.edu.controller.AlunoC c = new AlunoC();
+        AlunoM m = new AlunoM();
+        
+        m = c.pesquisaraluno(Integer.parseInt(jTextFieldMatricula.getText()));
+        
+        jTextFieldNome.setText(m.getNome());
+        jTextFieldEmail.setText(m.getEmail());
+       
        
     }//GEN-LAST:event_jButtonPesquisarActionPerformed
 
@@ -680,19 +609,13 @@ public class CadastroExcluir extends javax.swing.JFrame {
     private javax.swing.JButton jButtonProfExcluir;
     private javax.swing.JButton jButtonProfListar;
     private javax.swing.JButton jButtonProfPesquisar;
-    private javax.swing.JFormattedTextField jFormattedTextFieldAltura;
-    private javax.swing.JFormattedTextField jFormattedTextFieldIdade;
-    private javax.swing.JFormattedTextField jFormattedTextFieldPeso;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabelAltura;
     private javax.swing.JLabel jLabelEmail;
-    private javax.swing.JLabel jLabelIdade;
     private javax.swing.JLabel jLabelMatricula;
     private javax.swing.JLabel jLabelMatricula1;
     private javax.swing.JLabel jLabelNome;
     private javax.swing.JLabel jLabelNome1;
     private javax.swing.JLabel jLabelNome2;
-    private javax.swing.JLabel jLabelPeso;
     private javax.swing.JLabel jLabelProfMatricula;
     private javax.swing.JLabel jLabelProfNome;
     private javax.swing.JPanel jPanelAlunos;

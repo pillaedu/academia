@@ -252,7 +252,7 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonIniciarAulaActionPerformed
 
     private void jMenuItemCadastroalunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadastroalunoActionPerformed
-        CadastroAluno cadaluno = new CadastroAluno();
+        CadastroIncluir cadaluno = new CadastroIncluir();
        
         TelaBemVindo.hide();
          cadaluno.setVisible(true);
@@ -287,7 +287,7 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuBemVindoActionPerformed
 
     private void jButtonMedicaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMedicaoActionPerformed
-           Medicao m = new Medicao();
+           Medicao m = new Medicao(0);
            m.setVisible(true);
     }//GEN-LAST:event_jButtonMedicaoActionPerformed
 

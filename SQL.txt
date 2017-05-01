@@ -9,6 +9,9 @@ peso NUMERIC,
 altura NUMERIC
 );
 ALTER TABLE aluno ADD mes integer;
+alter table aluno drop column altura;
+alter table aluno drop column peso;
+
 
 drop table aula;
 

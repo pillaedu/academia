@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import br.edu.entity.AlunoM;
 import br.edu.entity.Aluno;
 import br.edu.swing.MensagemErro;
 import br.edu.swing.MensagemOK;
@@ -18,51 +19,51 @@ public class AlunoDAO {
 
     //insere um aluno no banco
 
-    public void inserir(Aluno a) {
+    public int inserir(AlunoM a) {
+        SQLException e = null;
+        int incluido = 0;
         try {
             Connection con = AppConnection.getConnection();
-            String insert = "insert into aluno (nome,email,idade,peso,altura,mes)"
-                    + "valueS (?,?,?,?,?,?)";
+            String insert = "insert into aluno (nome,email,idade,mes)"
+                    + "valueS (?,?,?,?)";
 
             try (PreparedStatement ps = (PreparedStatement) con.prepareStatement(insert)) {
                 ps.setString(1, a.getNome());
                 ps.setString(2, a.getEmail());
                 ps.setInt(3, a.getIdade());
-                ps.setFloat(4, a.getPeso());
-                ps.setFloat(5, a.getAltura());
-                ps.setInt(6,a.getMes());
+                ps.setInt(4,a.getMes());
               
-                int incluido = ps.executeUpdate();
-                int mes = inseri_mes(a.getMes());
-                if (incluido > 0 && mes>0) {
-                    ExibeMensagens.mostramensagemaluno(retornaultimo());
-                }
+                incluido = ps.executeUpdate();
+                //int mes = inseri_mes(a.getMes());
+                //if (incluido > 0 && mes>0) {
+                  //  ExibeMensagens.mostramensagemaluno(retornaultimo());
+                //}
             }
             con.close();
 
-        } catch (SQLException e) {
+        } catch (SQLException ex){ 
+            e = ex;
             ExibeMensagens.mostaerro("Erro ao inserir Aluno", e);
 
         }
+        return incluido;
     }
 
-    public List<Aluno> listartodos() {
+    public ArrayList<AlunoM> listartodos() {
         
-        ArrayList<Aluno> list = new ArrayList<Aluno>();
+        ArrayList<AlunoM> list = new ArrayList<AlunoM>();
         try {
          Connection con = AppConnection.getConnection();
 
             Statement stmt = (Statement) con.createStatement();
             ResultSet rs = stmt.executeQuery(
-                    "select id,nome,email,idade,peso,altura from aluno;");
+                    "select id,nome,email,idade from aluno;");
             while (rs.next()) {
-                Aluno a = new Aluno();
+                AlunoM a = new AlunoM();
                 a.setId(rs.getInt("id"));
                 a.setNome(rs.getString("nome"));
                 a.setEmail(rs.getString("email"));
                 a.setIdade(rs.getInt("idade"));
-                a.setPeso(rs.getFloat("peso"));
-                a.setAltura(rs.getFloat("altura"));
                 list.add(a);
 
             }
@@ -102,23 +103,20 @@ public class AlunoDAO {
 
     }
 
-    public Aluno buscar(int id) {
-        Aluno a = new Aluno();
-        
+    public AlunoM buscar(int id) {
+        AlunoM a = new AlunoM();       
         try {
             Connection con = AppConnection.getConnection();
             Statement stmt = (Statement) con.createStatement();
             ResultSet rs = stmt.executeQuery(
-                    "select id,nome,email,idade,peso,altura from aluno "
+                    "select id,nome,email from aluno "
                     + "where id =" + id + ";");
             while (rs.next()) {
 
                 a.setId(rs.getInt("id"));
                 a.setNome(rs.getString("nome"));
                 a.setEmail(rs.getString("email"));
-                a.setIdade(rs.getInt("idade"));
-                a.setPeso(rs.getFloat("peso"));
-                a.setAltura(rs.getFloat("altura"));
+
             }
 
         } catch (SQLException e) {

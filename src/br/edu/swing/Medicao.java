@@ -17,8 +17,13 @@ public class Medicao extends javax.swing.JFrame {
     /**
      * Creates new form Pagamento
      */
-    public Medicao() {
-        initComponents();
+    public Medicao(int numero) {
+            initComponents();
+        
+    }
+
+    private Medicao() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**

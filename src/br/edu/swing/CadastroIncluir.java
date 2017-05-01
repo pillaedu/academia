@@ -9,8 +9,10 @@ import br.edu.entity.Aluno;
 import br.edu.entity.Professor;
 import br.edu.DAO.AlunoDAO;
 import br.edu.DAO.AulaDAO;
+import br.edu.controller.AlunoC;
 import br.edu.dao.ProfessorDAO;
 import br.edu.entity.Aula;
+import br.edu.tools.ExibeMensagens;
 import java.awt.Component;
 import java.awt.Window;
 import java.sql.Date;
@@ -29,14 +31,14 @@ import javax.swing.SwingUtilities;
  *
  * @author EduardoPatricia
  */
-public class CadastroAluno extends javax.swing.JFrame {
+public class CadastroIncluir extends javax.swing.JFrame {
     Aluno a = new Aluno();
     AlunoDAO adao = new AlunoDAO();
            
     /**
      * Creates new form CadastroAluno
      */
-    public CadastroAluno() {
+    public CadastroIncluir() {
         initComponents();
     }
 
@@ -482,12 +484,22 @@ public class CadastroAluno extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGravarActionPerformed
-
-        a.setNome(jTextFieldNome.getText());
-        a.setEmail(jTextFieldNome.getText());
-        a.setIdade(Integer.parseInt(jFormattedTextFieldIdade.getText()));
-        a.setMes(Integer.parseInt(jFormattedTextFieldMes.getText()));
-        adao.inserir(a);
+        br.edu.controller.AlunoC control = new AlunoC();
+        int incluido =
+        control.gravaraluno(jTextFieldNome.getText(), jTextFieldEmail.getText(), Integer.parseInt(jFormattedTextFieldIdade.getText())
+            ,Integer.parseInt(jFormattedTextFieldMes.getText()));
+       
+        if (incluido > 0){
+            ExibeMensagens.mostramensagemaluno(incluido);
+        }else{
+            ExibeMensagens.mostaerro("Erro ao inserir aluno", null);
+        }
+        
+        //limpa os campos
+        jTextFieldNome.setText(null);
+        jTextFieldEmail.setText(null);
+        jFormattedTextFieldIdade.setText(null);
+        jFormattedTextFieldMes.setText(null);
         Component comp = SwingUtilities.getRoot(this);
         ((Window) comp).dispose();
         
@@ -572,7 +584,6 @@ public class CadastroAluno extends javax.swing.JFrame {
         
         
         
-        
     }//GEN-LAST:event_jButtonAulaGravarActionPerformed
 
     private void jFormattedTextFieldHora_inicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldHora_inicioActionPerformed
@@ -604,20 +615,21 @@ public class CadastroAluno extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadastroAluno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroIncluir.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadastroAluno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroIncluir.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadastroAluno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroIncluir.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CadastroAluno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroIncluir.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CadastroAluno().setVisible(true);
+                new CadastroIncluir().setVisible(true);
             }
         });
     }
