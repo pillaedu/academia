@@ -10,7 +10,10 @@ import br.edu.entity.*;
 import br.edu.DAO.AlunoDAO;
 import br.edu.DAO.AulaDAO;
 import br.edu.controller.AlunoC;
+import br.edu.controller.AulaC;
+import br.edu.controller.ProfessorC;
 import br.edu.dao.ProfessorDAO;
+import br.edu.tools.ExibeMensagens;
 import javax.swing.JOptionPane;
 //import br.edu.dao.ProfessorDAO;
 
@@ -20,7 +23,7 @@ import javax.swing.JOptionPane;
  * @author EduardoPatricia
  */
 public class CadastroExcluir extends javax.swing.JFrame {
-    Aluno a = new Aluno();
+
     AlunoDAO adao = new AlunoDAO();
            
     /**
@@ -479,10 +482,14 @@ public class CadastroExcluir extends javax.swing.JFrame {
         AlunoM m = new AlunoM();
         
         m = c.pesquisaraluno(Integer.parseInt(jTextFieldMatricula.getText()));
-        
-        jTextFieldNome.setText(m.getNome());
-        jTextFieldEmail.setText(m.getEmail());
-       
+        if (m.getId() > 0){
+            jTextFieldNome.setText(m.getNome());
+            jTextFieldEmail.setText(m.getEmail());
+        }else{
+            br.edu.tools.ExibeMensagens ex = new ExibeMensagens();
+            ex.mostramensagem("Não há aluno com esse ID");
+        }
+      
        
     }//GEN-LAST:event_jButtonPesquisarActionPerformed
 
@@ -495,8 +502,11 @@ public class CadastroExcluir extends javax.swing.JFrame {
             MensagemErro.jLabelErro.setText("Preencha a Matricula");
             m.setVisible(true);
         }
-        ProfessorDAO dao = new ProfessorDAO();
-        dao.excluir(Integer.parseInt(jTextFieldProfMatricula.getText()));
+        ProfessorC c = new ProfessorC();
+        c.excluir(Integer.parseInt(jTextFieldProfMatricula.getText()));
+        
+        // limpa campos
+        jTextFieldProfMatricula.setText(null);
     }//GEN-LAST:event_jButtonProfExcluirActionPerformed
 
     private void jTextFieldProfMatriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldProfMatriculaActionPerformed
@@ -505,17 +515,24 @@ public class CadastroExcluir extends javax.swing.JFrame {
 
     private void jButtonProfPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProfPesquisarActionPerformed
         // botao que pesquisa no form professor excluir
+       
+
         if (jTextFieldProfMatricula.getText().isEmpty()){
             MensagemErro m = new MensagemErro();
             MensagemErro.jLabelErro.setText("Preencha a Matricula");
             m.setVisible(true);
         }
         
-        br.edu.dao.ProfessorDAO consulta = new br.edu.dao.ProfessorDAO();
-        Professor ret = new Professor();
-        //ret.setNome("ze");
-        ret = consulta.buscar(Integer.parseInt(jTextFieldProfMatricula.getText()));
-        jTextFieldProfNome.setText(ret.getNome()); 
+        ProfessorC c = new ProfessorC();
+        ProfessorM model = new ProfessorM();
+        model = c.buscar(Integer.parseInt(jTextFieldProfMatricula.getText()));
+        
+        if(model.getId() >0){
+            jTextFieldProfNome.setText(model.getNome()); 
+        }else{
+            ExibeMensagens ex = new ExibeMensagens();
+            ex.mostramensagem("Não ha professor com esse id");
+        }
         
     }//GEN-LAST:event_jButtonProfPesquisarActionPerformed
 
@@ -530,13 +547,13 @@ public class CadastroExcluir extends javax.swing.JFrame {
             MensagemErro.jLabelErro.setText("Preencha o ID da Aula");
             m.setVisible(true);
         }
+        AulaM model = new AulaM();
         
-        br.edu.DAO.AulaDAO consulta = new br.edu.DAO.AulaDAO();
-        Aula ret = new Aula();
-        ret = consulta.buscar(Integer.parseInt(jTextFiedAulaid.getText()));
+        AulaC control = new AulaC();
+        model = control.buscar(jTextFiedAulaid.getText());
         
-        jTextFieldAulaNomeProf.setText(ret.getNome_professor());
-        jTextFieldAulaConteudo.setText(ret.getConteudo());
+        jTextFieldAulaNomeProf.setText(model.getNome_professor());
+        jTextFieldAulaConteudo.setText(model.getConteudo());
         
     }//GEN-LAST:event_jButtonAulaPesqActionPerformed
 

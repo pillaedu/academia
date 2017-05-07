@@ -5,107 +5,72 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import br.edu.entity.AlunoM;
-import br.edu.entity.Aluno;
-import br.edu.swing.MensagemErro;
-import br.edu.swing.MensagemOK;
 import br.edu.tools.ExibeMensagens;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JOptionPane;
+
 
 public class AlunoDAO {
-
     //insere um aluno no banco
-
-    public int inserir(AlunoM a) {
+    public int inserir(AlunoM a) throws SQLException, ClassNotFoundException {
         SQLException e = null;
         int incluido = 0;
-        try {
-            Connection con = AppConnection.getConnection();
-            String insert = "insert into aluno (nome,email,idade,mes)"
-                    + "valueS (?,?,?,?)";
 
-            try (PreparedStatement ps = (PreparedStatement) con.prepareStatement(insert)) {
-                ps.setString(1, a.getNome());
-                ps.setString(2, a.getEmail());
-                ps.setInt(3, a.getIdade());
-                ps.setInt(4,a.getMes());
-              
-                incluido = ps.executeUpdate();
-                //int mes = inseri_mes(a.getMes());
-                //if (incluido > 0 && mes>0) {
-                  //  ExibeMensagens.mostramensagemaluno(retornaultimo());
-                //}
-            }
-            con.close();
+        Connection con = AppConnection.getConnection();
+        String insert = "insert into aluno (nome,email,idade,mes)"
+                + "valueS (?,?,?,?)";
 
-        } catch (SQLException ex){ 
-            e = ex;
-            ExibeMensagens.mostaerro("Erro ao inserir Aluno", e);
+        PreparedStatement ps = (PreparedStatement) con.prepareStatement(insert);
 
-        }
+        ps.setString(1, a.getNome());
+        ps.setString(2, a.getEmail());
+        ps.setInt(3, a.getIdade());
+        ps.setInt(4, a.getMes());
+
+        incluido = ps.executeUpdate();
+
+        con.close();
+
         return incluido;
     }
 
-    public ArrayList<AlunoM> listartodos() {
-        
+    public ArrayList<AlunoM> listartodos() throws SQLException, ClassNotFoundException {
+
         ArrayList<AlunoM> list = new ArrayList<AlunoM>();
-        try {
-         Connection con = AppConnection.getConnection();
+        Connection con = AppConnection.getConnection();
 
-            Statement stmt = (Statement) con.createStatement();
-            ResultSet rs = stmt.executeQuery(
-                    "select id,nome,email,idade from aluno;");
-            while (rs.next()) {
-                AlunoM a = new AlunoM();
-                a.setId(rs.getInt("id"));
-                a.setNome(rs.getString("nome"));
-                a.setEmail(rs.getString("email"));
-                a.setIdade(rs.getInt("idade"));
-                list.add(a);
+        Statement stmt = (Statement) con.createStatement();
+        ResultSet rs = stmt.executeQuery(
+                "select id,nome,email,idade from aluno;");
+        while (rs.next()) {
+            AlunoM a = new AlunoM();
+            a.setId(rs.getInt("id"));
+            a.setNome(rs.getString("nome"));
+            a.setEmail(rs.getString("email"));
+            a.setIdade(rs.getInt("idade"));
+            list.add(a);
 
-            }
-
-        } catch (SQLException e) {
-            ExibeMensagens.mostaerro("Erro ao buscar alunos", e);
         }
 
-        if (list.isEmpty()) {
-            ExibeMensagens.mostramensagem("Não ha alunos");
-            return null;
-        } else {
-            return list;
-        }
-
+        return list;
     }
 
-    public int retornaultimo() {
+    public int retornaultimo() throws SQLException, ClassNotFoundException {
         int id = 0;
-        try {
-            Connection con = AppConnection.getConnection();
-            Statement stmt = (Statement) con.createStatement();
-            ResultSet rs = stmt.executeQuery(
-                    "select max(id) as id from aluno;");
-            while (rs.next()) {
-                id = rs.getInt("id");
-            }
-        } catch (SQLException e) {
-            ExibeMensagens.mostaerro("Erro ao Buscao Aluno", e);
+        Connection con = AppConnection.getConnection();
+        Statement stmt = (Statement) con.createStatement();
+        ResultSet rs = stmt.executeQuery(
+                "select max(id) as id from aluno;");
+        while (rs.next()) {
+            id = rs.getInt("id");
         }
-        if (id > 0) {
-            return id;
-        } else {
-            ExibeMensagens.mostramensagem("Não foi possivel cadastrar o aluno " + id);
-            return 0;
-        }
+        return id;
+   }
 
-    }
-
-    public AlunoM buscar(int id) {
-        AlunoM a = new AlunoM();       
-        try {
+    public AlunoM buscar(int id) throws ClassNotFoundException, SQLException {
+        AlunoM a = new AlunoM();
             Connection con = AppConnection.getConnection();
             Statement stmt = (Statement) con.createStatement();
             ResultSet rs = stmt.executeQuery(
@@ -118,83 +83,42 @@ public class AlunoDAO {
                 a.setEmail(rs.getString("email"));
 
             }
-
-        } catch (SQLException e) {
-            ExibeMensagens.mostaerro("Erro ao Buscao Aluno", e);
-        }
-        if (a.getId() > 0) {
             return a;
-        } else {
-            ExibeMensagens.mostramensagem("Não ha aluno com id " + id);
-            return null;
-        }
+     }
 
+    public int excluir(int id) throws SQLException, ClassNotFoundException {
+
+        String delete = "delete from aluno "
+                + "where id = ?;";
+        Connection con = AppConnection.getConnection();
+        PreparedStatement ps;
+        ps = (PreparedStatement) con.prepareStatement(delete);
+        ps.setInt(1, id);
+        int excluidos = ps.executeUpdate();
+
+        con.close();
+        return excluidos;
     }
 
-    public void excluir(int id) {
-        
+/*
+    public List<AlunoM> listardevedores(String mes) {
+
+        ArrayList<Alunoold> list = new ArrayList<Alunoold>();
         try {
-            String delete = "delete from aluno "
-                    + "where id = ?;";
             Connection con = AppConnection.getConnection();
-            try (PreparedStatement ps = (PreparedStatement) con.prepareStatement(delete)) {
-                ps.setInt(1, id);
-                int excluidos = ps.executeUpdate();
-                if (excluidos > 0) {
-                    ExibeMensagens.mensagemok("Aluno excluido com sucesso");
-                } else {
-                    ExibeMensagens.mostramensagem("Não ha aluno com esse id");
-                }
-            }
-            con.close();
-
-        } catch (SQLException e) {
-            ExibeMensagens.mostaerro("Erro ao excluir aluno", e);
-        }
-    }
-  
-    public int inseri_mes(int mes){
-        int id = retornaultimo();
-        int inserido = 0;
-        try {
-            String insert = "insert into vencimento_aluno (id_aluno, mes_vencimento)"
-                   + " values (?,?);";
-            
-            Connection con = AppConnection.getConnection();            
-            
-            try (PreparedStatement ps = (PreparedStatement) con.prepareStatement(insert)) {
-                ps.setInt(1, id);
-                ps.setInt(2, mes);
-                
-                inserido = ps.executeUpdate();
-            }
-            con.close();
-
-        } catch (SQLException e) {
-            ExibeMensagens.mostaerro("Erro ao excluir aluno", e);
-        }
-        
-        return inserido;
-    }
-    
-    public List<Aluno> listardevedores(String mes) {
-        
-        ArrayList<Aluno> list = new ArrayList<Aluno>();
-        try {
-         Connection con = AppConnection.getConnection();
 
             Statement stmt = (Statement) con.createStatement();
             ResultSet rs = stmt.executeQuery(
-                    "select a.id as id,a.nome as nome,a.email as email" 
-                    +" from aluno a, mensalidade m, vencimento_aluno v"
-                    +" where 'janeiro' not in (select mes from mensalidade where id_aluno = a.id)"
-                    +" and a.mes <  (Select Month(now()));");
+                    "select a.id as id,a.nome as nome,a.email as email"
+                    + " from aluno a, mensalidade m, vencimento_aluno v"
+                    + " where 'janeiro' not in (select mes from mensalidade where id_aluno = a.id)"
+                    + " and a.mes <  (Select Month(now()));");
             while (rs.next()) {
-                Aluno a = new Aluno();
+                Alunoold a = new Alunoold();
                 a.setId(rs.getInt("id"));
                 a.setNome(rs.getString("nome"));
                 a.setEmail(rs.getString("email"));
-        
+
                 list.add(a);
             }
 
@@ -203,12 +127,12 @@ public class AlunoDAO {
         }
 
         if (list.isEmpty()) {
-            ExibeMensagens.mostramensagem("Não ha devedores para o mes de "+ mes);
+            ExibeMensagens.mostramensagem("Não ha devedores para o mes de " + mes);
             return null;
         } else {
             return list;
         }
 
     }
-
+*/
 }

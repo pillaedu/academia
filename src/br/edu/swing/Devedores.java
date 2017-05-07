@@ -6,7 +6,7 @@
 package br.edu.swing;
 
 import br.edu.DAO.AlunoDAO;
-import br.edu.entity.Aluno;
+import br.edu.entity.Alunoold;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -127,15 +127,15 @@ public class Devedores extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxMesActionPerformed
 
     private void jButtonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtualizarActionPerformed
-        Aluno a = new Aluno();
+        Alunoold a = new Alunoold();
         AlunoDAO dao = new AlunoDAO();
         
         DefaultTableModel val = (DefaultTableModel) jTableAlunos.getModel();
-        List<Aluno> list = new ArrayList<Aluno>();
+        List<Alunoold> list = new ArrayList<Alunoold>();
         String mes = jComboBoxMes.getSelectedItem().toString();
         list = dao.listardevedores(mes);
         
-        for (Aluno list1 : list) {
+        for (Alunoold list1 : list) {
            int i = 0;
             val.addRow(new Object[] {list1.getId(),list1.getNome(),list1.getEmail(),list1.getIdade()});
           if (val.getValueAt(i, 0) == null || val.getValueAt(i,0).toString().isEmpty()) 

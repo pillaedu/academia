@@ -2,7 +2,7 @@ package br.edu.entity;
 
 import java.util.Date;
 
-public class Aula {
+public class AulaM {
 	private int id;
 	private int id_professor;
 	private String conteudo;

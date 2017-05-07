@@ -15,6 +15,8 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import br.edu.controller.AlunoC;
+import br.edu.controller.ProfessorC;
+import br.edu.tools.ExibeMensagens;
 
 
 /**
@@ -22,9 +24,6 @@ import br.edu.controller.AlunoC;
  * @author EduardoPatricia
  */
 public class CadastroListar extends javax.swing.JFrame {
-    Aluno a = new Aluno();
-    AlunoDAO adao = new AlunoDAO();
-           
     /**
      * Creates new form CadastroAluno
      */
@@ -245,53 +244,65 @@ public class CadastroListar extends javax.swing.JFrame {
 
         //carrega a tabela de alunos
         AlunoC c = new AlunoC();
-        
+
         DefaultTableModel val = (DefaultTableModel) jTableAlunos.getModel();
         List<AlunoM> list = new ArrayList<AlunoM>();
         list = c.listartodos();
-        
-        for (AlunoM list1 : list) {
-           int i = 0;
-            val.addRow(new Object[] {list1.getId(),list1.getNome(),list1.getEmail(),list1.getIdade()});
-          if (val.getValueAt(i, 0) == null) 
+
+        if (list.isEmpty()) {
+            br.edu.tools.ExibeMensagens exibe = new ExibeMensagens();
+            exibe.mostramensagem("Nâo há alunos");
+        } else {
+            for (AlunoM list1 : list) {
+                int i = 0;
+                val.addRow(new Object[]{list1.getId(), list1.getNome(), list1.getEmail(), list1.getIdade()});
+                if (val.getValueAt(i, 0) == null) {
                     val.removeRow(i);
-          i ++;
+                }
+                i++;
+            }
         }
-        
-        
+
         //carrega a tabela de professor
-        Professor p = new Professor();
-        ProfessorDAO profdao = new ProfessorDAO();
-        
+        ProfessorM p = new ProfessorM();
+        ProfessorC control = new ProfessorC();
+        List<ProfessorM> proflist = new ArrayList<ProfessorM>();
+
+        proflist = control.listartodos();
+
         DefaultTableModel prof = (DefaultTableModel) jTableProfessores.getModel();
-        List<Professor> proflist = new ArrayList<Professor>();
-        proflist = profdao.listartodos();
-        
-        for (Professor list1 : proflist) {
-           int i = 0;
-            prof.addRow(new Object[] {list1.getId(),list1.getNome()});
-          if (prof.getValueAt(i, 0) == null) 
+
+        if (proflist.isEmpty()) {
+            br.edu.tools.ExibeMensagens exibe = new ExibeMensagens();
+            exibe.mostramensagem("Nâo há professores");
+        } else {
+
+            for (ProfessorM list1 : proflist) {
+                int i = 0;
+                prof.addRow(new Object[]{list1.getId(), list1.getNome()});
+                if (prof.getValueAt(i, 0) == null) {
                     prof.removeRow(i);
-          i ++;
+                }
+                i++;
+            }
         }
-        
         //carrega a tabela aulas
-        Aula aula = new Aula();
+        AulaM aula = new AulaM();
         AulaDAO adao = new AulaDAO();
-        
+
         DefaultTableModel tableaula = (DefaultTableModel) jTableAula.getModel();
-        List<Aula> aulalist = new ArrayList<Aula>();
+        List<AulaM> aulalist = new ArrayList<AulaM>();
         aulalist = adao.listartodos();
-        
-        for (Aula list1 : aulalist) {
-           int i = 0;
-            tableaula.addRow(new Object[] {list1.getId(),list1.getNome_professor(),list1.getConteudo(),list1.getCapacidade_alunos(),list1.getHora_inicio(),list1.getHora_fim()});
-         System.out.println(list1.getId());
-            if (tableaula.getValueAt(i, 0) == null) 
-                    tableaula.removeRow(i);
-          i ++;
+
+        for (AulaM list1 : aulalist) {
+            int i = 0;
+            tableaula.addRow(new Object[]{list1.getId(), list1.getNome_professor(), list1.getConteudo(), list1.getCapacidade_alunos(), list1.getHora_inicio(), list1.getHora_fim()});
+            System.out.println(list1.getId());
+            if (tableaula.getValueAt(i, 0) == null) {
+                tableaula.removeRow(i);
+            }
+            i++;
         }
-      
     }//GEN-LAST:event_formWindowOpened
 
     private void jTabbedPaneExcluirFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTabbedPaneExcluirFocusGained

@@ -3,10 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/EduardoPatricia/Documents/NetBeansProjects/Academia/src/br/edu/entity/AlunoM.java</file>
-            <file>file:/C:/Users/EduardoPatricia/Documents/NetBeansProjects/Academia/src/br/edu/swing/CadastroListar.java</file>
+            <file>file:/C:/Users/EduardoPatricia/Documents/NetBeansProjects/Academia/src/br/edu/controller/AulaC.java</file>
             <file>file:/C:/Users/EduardoPatricia/Documents/NetBeansProjects/Academia/src/br/edu/controller/AlunoC.java</file>
-            <file>file:/C:/Users/EduardoPatricia/Documents/NetBeansProjects/Academia/src/br/edu/dao/AlunoDAO.java</file>
+            <file>file:/C:/Users/EduardoPatricia/Documents/NetBeansProjects/Academia/src/br/edu/dao/AulaDAO.java</file>
+            <file>file:/C:/Users/EduardoPatricia/Documents/NetBeansProjects/Academia/src/br/edu/swing/CadastroExcluir.java</file>
         </group>
     </open-files>
 </project-private>

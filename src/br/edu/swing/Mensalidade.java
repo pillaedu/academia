@@ -7,7 +7,7 @@ package br.edu.swing;
 
 import br.edu.DAO.AlunoDAO;
 import br.edu.dao.PagamentoDAO;
-import br.edu.entity.Aluno;
+import br.edu.entity.Alunoold;
 
 /**
  *
@@ -196,7 +196,7 @@ public class Mensalidade extends javax.swing.JFrame {
         if (jTextFieldMatricula.getText().isEmpty()){
             br.edu.tools.ExibeMensagens.mostramensagem("Preencha o campo matricula");
         }
-        Aluno a = new Aluno();
+        Alunoold a = new Alunoold();
         AlunoDAO dao = new AlunoDAO();
         a = dao.buscar(Integer.parseInt(jTextFieldMatricula.getText()));
         jTextFieldNome.setText(a.getNome());

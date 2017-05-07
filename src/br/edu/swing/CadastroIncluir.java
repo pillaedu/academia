@@ -4,16 +4,18 @@
  * and open the template in the editor.
  */
 package br.edu.swing;
-
-import br.edu.entity.Aluno;
 import br.edu.entity.Professor;
 import br.edu.DAO.AlunoDAO;
 import br.edu.DAO.AulaDAO;
 import br.edu.controller.AlunoC;
+import br.edu.controller.AulaC;
+import br.edu.controller.ProfessorC;
 import br.edu.dao.ProfessorDAO;
-import br.edu.entity.Aula;
+import br.edu.entity.AulaM;
+import br.edu.entity.ProfessorM;
 import br.edu.tools.ExibeMensagens;
 import java.awt.Component;
+import java.awt.SystemColor;
 import java.awt.Window;
 import java.sql.Date;
 import java.text.DateFormat;
@@ -32,8 +34,7 @@ import javax.swing.SwingUtilities;
  * @author EduardoPatricia
  */
 public class CadastroIncluir extends javax.swing.JFrame {
-    Aluno a = new Aluno();
-    AlunoDAO adao = new AlunoDAO();
+
            
     /**
      * Creates new form CadastroAluno
@@ -287,6 +288,9 @@ public class CadastroIncluir extends javax.swing.JFrame {
                     .addContainerGap(312, Short.MAX_VALUE)))
         );
 
+        jTextFieldProfNome.getAccessibleContext().setAccessibleName("Nome do Professor");
+        jTextFieldProfNome.getAccessibleContext().setAccessibleDescription("Nome do Professor");
+
         javax.swing.GroupLayout jPanelProfessoresLayout = new javax.swing.GroupLayout(jPanelProfessores);
         jPanelProfessores.setLayout(jPanelProfessoresLayout);
         jPanelProfessoresLayout.setHorizontalGroup(
@@ -485,15 +489,9 @@ public class CadastroIncluir extends javax.swing.JFrame {
 
     private void jButtonGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGravarActionPerformed
         br.edu.controller.AlunoC control = new AlunoC();
-        int incluido =
+
         control.gravaraluno(jTextFieldNome.getText(), jTextFieldEmail.getText(), Integer.parseInt(jFormattedTextFieldIdade.getText())
             ,Integer.parseInt(jFormattedTextFieldMes.getText()));
-       
-        if (incluido > 0){
-            ExibeMensagens.mostramensagemaluno(incluido);
-        }else{
-            ExibeMensagens.mostaerro("Erro ao inserir aluno", null);
-        }
         
         //limpa os campos
         jTextFieldNome.setText(null);
@@ -522,15 +520,18 @@ public class CadastroIncluir extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldProfNomeActionPerformed
 
     private void jButtonProfGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProfGravarActionPerformed
-        // TODO add your handling code here:
-        Professor p = new Professor();
-        System.out.println("criado classe");
-        p.setNome(jTextFieldProfNome.getText());
-        System.out.println("atribuido campo");
-        ProfessorDAO dao = new ProfessorDAO();
-        System.out.println("metodo chamado");
-        dao.inserir(p);
+        // insere professor
+
+        if (jTextFieldProfNome.getText().isEmpty()){
+            ExibeMensagens m = new ExibeMensagens();
+            m.mostramensagem("Preencha o Nome");
+        }
         
+        ProfessorC c = new ProfessorC();
+        c.gravar(jTextFieldProfNome.getText());
+        
+        //limpa o campo
+        jTextFieldProfNome.setText(null);
     }//GEN-LAST:event_jButtonProfGravarActionPerformed
 
     private void jTextFieldConteudoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldConteudoActionPerformed
@@ -541,19 +542,21 @@ public class CadastroIncluir extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldAulaMatriculaActionPerformed
 
+    // botao de pesquisar matricula do professor
     private void jButtonAulaPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAulaPesquisarActionPerformed
         // botao que pesquisa no form professor excluir
-        if (jTextFieldAulaMatricula.getText().isEmpty()){
+        if (jTextFieldAulaMatricula.getText().isEmpty()) {
             MensagemErro m = new MensagemErro();
             MensagemErro.jLabelErro.setText("Preencha a Matricula");
             m.setVisible(true);
         }
 
-        br.edu.dao.ProfessorDAO consulta = new br.edu.dao.ProfessorDAO();
-        Professor ret = new Professor();
-        //ret.setNome("ze");
-        ret = consulta.buscar(Integer.parseInt(jTextFieldAulaMatricula.getText()));
-        jTextFieldAulaProfNome.setText(ret.getNome());
+        ProfessorM model = new ProfessorM();
+        ProfessorC control = new ProfessorC();
+
+        model = control.buscar(Integer.parseInt(jTextFieldAulaMatricula.getText()));
+
+        jTextFieldAulaProfNome.setText(model.getNome());
 
     }//GEN-LAST:event_jButtonAulaPesquisarActionPerformed
 
@@ -568,22 +571,21 @@ public class CadastroIncluir extends javax.swing.JFrame {
     
     //Botao que insere aula
     private void jButtonAulaGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAulaGravarActionPerformed
+        AulaC control = new AulaC();
+
+        control.insere(jTextFieldAulaMatricula.getText(), jTextFieldConteudo.getText(), 
+            jTextFieldAulaCapacidade.getText(), jFormattedTextFieldHora_inicio.getText(),
+            jFormattedTextHora_fim.getText());
+
         AulaDAO dao = new AulaDAO();
-        Aula a = new Aula();
-        a.setId_professor(Integer.parseInt(jTextFieldAulaMatricula.getText()));
-        a.setConteudo(jTextFieldConteudo.getText());
-        a.setCapacidade_alunos(Integer.parseInt(jTextFieldAulaCapacidade.getText()));
-        String horainicio = jFormattedTextFieldHora_inicio.getText()+":00";
-        a.setHora_inicio(horainicio);
-        String horafim = jFormattedTextHora_fim.getText()+":00";
-        a.setHora_fim(horafim);
-        
-        
-        dao.inserir(a);
-        
-        
-        
-        
+
+        // limpa os campos
+        jTextFieldAulaMatricula.setText(null);
+        jTextFieldConteudo.setText(null);
+        jTextFieldAulaCapacidade.setText(null);
+        jFormattedTextFieldHora_inicio.setText(null);
+        jFormattedTextHora_fim.setText(null);
+
     }//GEN-LAST:event_jButtonAulaGravarActionPerformed
 
     private void jFormattedTextFieldHora_inicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldHora_inicioActionPerformed

@@ -6,7 +6,7 @@
 package br.edu.swing;
 
 import br.edu.DAO.AlunoDAO;
-import br.edu.entity.Aluno;
+
 
 /**
  *
@@ -189,12 +189,7 @@ public class Medicao extends javax.swing.JFrame {
         // TODO add your handling code here:
        if (getjTextFieldMatricula().getText().isEmpty()){
             br.edu.tools.ExibeMensagens.mostramensagem("Preencha o campo matricula");
-        }
-        Aluno a = new Aluno();
-        AlunoDAO dao = new AlunoDAO();
-        a = dao.buscar(Integer.parseInt(getjTextFieldMatricula().getText()));
-        jTextFieldNome.setText(a.getNome());
-        
+        }        
     }//GEN-LAST:event_jButtonPesquisarActionPerformed
 
     private void jButtonGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGravarActionPerformed

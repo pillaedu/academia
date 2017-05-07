@@ -24,7 +24,7 @@ public class ExibeMensagens {
      * @param mensagem
      * @param e
      */
-    public static void mostaerro(String mensagem, SQLException e){
+    public void mostaerro(String mensagem, SQLException e){
     // TODO Auto-generated catch block
         MensagemErro m = new MensagemErro();
         MensagemErro.jLabelErro.setText(mensagem);
@@ -33,19 +33,24 @@ public class ExibeMensagens {
         System.out.println(e.getStackTrace());
     
     }
- public static void mostramensagem(String mensagem){
+ public void mostramensagem(String mensagem){
      br.edu.swing.MensagemAviso m = new MensagemAviso();
      MensagemAviso.jLabelStatus.setText(mensagem);
      m.setVisible(true);
  }
  
- public static void mostramensagemaluno(int id){
+ public void mostramensagemaluno(int id){
      br.edu.swing.MensagemokAluno m = new MensagemokAluno();
      MensagemokAluno.jLabelErro.setText("Aluno com ID "+id+" inserido com sucesso");
      m.setVisible(true);
  }
  
- public static void mensagemok(String mensagem){
+ public void erroconexao(String mensagem, ClassNotFoundException ex){
+ 
+ 
+ 
+ }
+ public void mensagemok(String mensagem){
      MensagemOK m = new MensagemOK();
      m.setVisible(true);
  }
