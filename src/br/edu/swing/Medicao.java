@@ -6,6 +6,8 @@
 package br.edu.swing;
 
 import br.edu.DAO.AlunoDAO;
+import br.edu.controller.MedicaoC;
+import br.edu.tools.ExibeMensagens;
 
 
 /**
@@ -187,21 +189,25 @@ public class Medicao extends javax.swing.JFrame {
 
     private void jButtonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarActionPerformed
         // TODO add your handling code here:
-       if (getjTextFieldMatricula().getText().isEmpty()){
-            br.edu.tools.ExibeMensagens.mostramensagem("Preencha o campo matricula");
-        }        
+        if (getjTextFieldMatricula().getText().isEmpty()) {
+            br.edu.tools.ExibeMensagens m = new ExibeMensagens();
+            m.mostramensagem("Preencha o campo matricula");
+        } else {
+            MedicaoC c = new MedicaoC();
+            jTextFieldNome.setText(c.buscar(getjTextFieldMatricula().getText()));
+        }
     }//GEN-LAST:event_jButtonPesquisarActionPerformed
 
     private void jButtonGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGravarActionPerformed
-        br.edu.entity.Medicoes m = new br.edu.entity.Medicoes();
-        m.setId_aluno(Integer.parseInt(getjTextFieldMatricula().getText()));
-        m.setPeso(Float.parseFloat(jTextFieldPeso.getText()));
-        m.setAltura(Float.parseFloat(jFTexfieldAltura.getText()));
+        br.edu.controller.MedicaoC c = new MedicaoC();
         
-        br.edu.DAO.MedicoesDAO dao = new br.edu.DAO.MedicoesDAO();
-        dao.inserir(m);
-        
-        
+        c.inserir(getjTextFieldMatricula().getText(),jTextFieldPeso.getText(),
+                jFTexfieldAltura.getText());  
+        //limpa campos
+        jTextFieldMatricula.setText(null);
+        jTextFieldNome.setText(null);
+        jTextFieldPeso.setText(null);
+        jFTexfieldAltura.setText(null);
     }//GEN-LAST:event_jButtonGravarActionPerformed
 
     private void jTextFieldNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomeActionPerformed

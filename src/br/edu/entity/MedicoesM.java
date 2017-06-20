@@ -2,7 +2,7 @@ package br.edu.entity;
 
 import java.sql.Date;
 
-public class Medicoes {
+public class MedicoesM {
 	private int id;
 	private Date data;
 	private int id_aluno;

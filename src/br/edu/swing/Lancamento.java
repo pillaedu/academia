@@ -5,6 +5,8 @@
  */
 package br.edu.swing;
 
+import br.edu.controller.LancamentoC;
+
 /**
  *
  * @author EduardoPatricia
@@ -30,12 +32,12 @@ public class Lancamento extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabelTipo = new javax.swing.JLabel();
-        jTextFieldMatricula = new javax.swing.JTextField();
+        jTextFieldComent = new javax.swing.JTextField();
         jLabelMes = new javax.swing.JLabel();
         jButtonGravar = new javax.swing.JButton();
         jLabelMatricula2 = new javax.swing.JLabel();
         jComboTipo = new javax.swing.JComboBox();
-        jTextFieldMatricula1 = new javax.swing.JTextField();
+        jTextFieldMatriculaValor = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Inserir Pagamento de Mensalidade");
@@ -52,9 +54,9 @@ public class Lancamento extends javax.swing.JFrame {
         jLabelTipo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabelTipo.setText("Tipo");
 
-        jTextFieldMatricula.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldComent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldMatriculaActionPerformed(evt);
+                jTextFieldComentActionPerformed(evt);
             }
         });
 
@@ -79,9 +81,9 @@ public class Lancamento extends javax.swing.JFrame {
             }
         });
 
-        jTextFieldMatricula1.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldMatriculaValor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldMatricula1ActionPerformed(evt);
+                jTextFieldMatriculaValorActionPerformed(evt);
             }
         });
 
@@ -97,15 +99,15 @@ public class Lancamento extends javax.swing.JFrame {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabelTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jComboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabelMes, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextFieldMatricula1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jTextFieldMatriculaValor, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabelMatricula2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jTextFieldComent, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(248, 248, 248)
                         .addComponent(jButtonGravar, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -119,10 +121,10 @@ public class Lancamento extends javax.swing.JFrame {
                     .addComponent(jLabelTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelMes, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldMatricula1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldMatriculaValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(50, 50, 50)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextFieldMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldComent, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelMatricula2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(59, 59, 59)
                 .addComponent(jButtonGravar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -135,21 +137,24 @@ public class Lancamento extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextFieldMatriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldMatriculaActionPerformed
+    private void jTextFieldComentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldComentActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldMatriculaActionPerformed
+    }//GEN-LAST:event_jTextFieldComentActionPerformed
 
     private void jButtonGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGravarActionPerformed
-          
+        LancamentoC control = new LancamentoC();
+        String tipo = jComboTipo.getSelectedItem().toString();
+        control.incluir(tipo,jTextFieldMatriculaValor.toString(),jTextFieldComent.toString());
+        
     }//GEN-LAST:event_jButtonGravarActionPerformed
 
     private void jComboTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboTipoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboTipoActionPerformed
 
-    private void jTextFieldMatricula1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldMatricula1ActionPerformed
+    private void jTextFieldMatriculaValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldMatriculaValorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldMatricula1ActionPerformed
+    }//GEN-LAST:event_jTextFieldMatriculaValorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -197,7 +202,7 @@ public class Lancamento extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelMes;
     private javax.swing.JLabel jLabelTipo;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextFieldMatricula;
-    private javax.swing.JTextField jTextFieldMatricula1;
+    private javax.swing.JTextField jTextFieldComent;
+    private javax.swing.JTextField jTextFieldMatriculaValor;
     // End of variables declaration//GEN-END:variables
 }

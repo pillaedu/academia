@@ -1,33 +1,27 @@
 package br.edu.DAO;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import br.edu.entity.Lancamento;
+import br.edu.entity.LancamentoM;
 import br.edu.tools.ExibeMensagens;
 
 public class LancamentoDAO {
 
     //insere um lancamento no banco
-    public void inserir(Lancamento l) {
+    public int inserir(LancamentoM l) throws SQLException, ClassNotFoundException {
 
-        try {
-            String insert = "insert into lancamento(tipo,valor,data)"
-                    + "values (?,?,curdate())";
-            Connection con = AppConnection.getConnection();
-            PreparedStatement ps = (PreparedStatement) con.prepareStatement(insert);
-            ps.setString(1, l.getTipo());
-            ps.setFloat(2, l.getValor());
+        String insert = "insert into lancamento(tipo,valor,data)"
+                + "values (?,?,curdate())";
+        Connection con = AppConnection.getConnection();
+        PreparedStatement ps = (PreparedStatement) con.prepareStatement(insert);
+        ps.setString(1, l.getTipo());
+        ps.setInt(2, l.getValor());
 
-            int resultado = ps.executeUpdate();
-            if (resultado != 0) {
-                ExibeMensagens.mensagemok("Lançamento incluido com sucesso");
-            }
-            ps.close();
-            con.close();
-        } catch (SQLException e) {
-            ExibeMensagens.mostaerro("Erro ao inserir lancamento", e);
-        }
+        int resultado = ps.executeUpdate();
+        ps.close();
+        con.close();
+
+        return resultado;
     }
 }

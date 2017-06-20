@@ -2,10 +2,10 @@ package br.edu.entity;
 
 import java.util.Date;
 
-public class Lancamento {
+public class LancamentoM {
 	private int id;
 	private String tipo;
-	private float valor;
+	private int valor;
 	private Date data;
 	private String descricao;
 	
@@ -21,10 +21,10 @@ public class Lancamento {
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
-	public float getValor() {
+	public int getValor() {
 		return valor;
 	}
-	public void setValor(float valor) {
+	public void setValor(int valor) {
 		this.valor = valor;
 	}
 	public Date getData() {

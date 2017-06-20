@@ -33,37 +33,28 @@ public class AulaDAO {
         return incluido;
     }
 
-    public List<AulaM> listartodos() {
+    public List<AulaM> listartodos() throws SQLException, ClassNotFoundException {
 
         ArrayList<AulaM> list = new ArrayList<AulaM>();
-        try {
-            Connection con = br.edu.DAO.AppConnection.getConnection();
-            Statement stmt = (Statement) con.createStatement();
-            ResultSet rs = stmt.executeQuery("select a.id, p.nome, a.conteudo, a.capacidade_alunos, date_format(a.hora_inicio,'%h:%i:%s') as hora_inicio,  date_format(a.hora_fim,'%h:%i:%s') as hora_fim"
-                    + " from aula a , professor p"
-                    + " where a.id_professor = p.id;");
-            while (rs.next()) {
-                AulaM a = new AulaM();
-                a.setId(rs.getInt("a.id"));
-                a.setNome_professor(rs.getString("p.nome"));
-                a.setConteudo(rs.getString("a.conteudo"));
-                a.setCapacidade_alunos(rs.getInt("a.capacidade_alunos"));
-                a.setHora_inicio(rs.getString("hora_inicio"));
-                a.setHora_fim(rs.getString("hora_fim"));
-                list.add(a);
 
-            }
+        Connection con = br.edu.DAO.AppConnection.getConnection();
+        Statement stmt = (Statement) con.createStatement();
+        ResultSet rs = stmt.executeQuery("select a.id, p.nome, a.conteudo, a.capacidade_alunos, date_format(a.hora_inicio,'%h:%i:%s') as hora_inicio,  date_format(a.hora_fim,'%h:%i:%s') as hora_fim"
+                + " from aula a , professor p"
+                + " where a.id_professor = p.id;");
+        while (rs.next()) {
+            AulaM a = new AulaM();
+            a.setId(rs.getInt("a.id"));
+            a.setNome_professor(rs.getString("p.nome"));
+            a.setConteudo(rs.getString("a.conteudo"));
+            a.setCapacidade_alunos(rs.getInt("a.capacidade_alunos"));
+            a.setHora_inicio(rs.getString("hora_inicio"));
+            a.setHora_fim(rs.getString("hora_fim"));
+            list.add(a);
 
-        } catch (SQLException e) {
-            ExibeMensagens.mostaerro("Erro ao buscar Aulas Tente Novamente ", e);
         }
 
-        if (list.isEmpty()) {
-            ExibeMensagens.mostramensagem("Não há aulas com esse ID, favor tentar novamente");
-            return null;
-        } else {
-            return list;
-        }
+        return list;
 
     }
     

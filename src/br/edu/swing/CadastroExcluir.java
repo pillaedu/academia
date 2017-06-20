@@ -573,9 +573,13 @@ public class CadastroExcluir extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonAulaListarActionPerformed
 
     private void jButtonAulaExcluir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAulaExcluir1ActionPerformed
-        // TODO add your handling code here:
-        AulaDAO dao = new AulaDAO();
-        dao.excluir(Integer.parseInt(jTextFiedAulaid.getText()));        
+        AulaC control = new AulaC();
+        control.excluir(jTextFiedAulaid.getText());
+        
+        //limpa campos
+        jTextFiedAulaid.setText(null);
+        jTextFieldAulaConteudo.setText(null);
+        jTextFieldAulaNomeProf.setText(null);
     }//GEN-LAST:event_jButtonAulaExcluir1ActionPerformed
 
     /**

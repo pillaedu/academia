@@ -30,7 +30,6 @@ public class AlunoDAO {
         ps.setInt(4, a.getMes());
 
         incluido = ps.executeUpdate();
-
         con.close();
 
         return incluido;
@@ -99,7 +98,7 @@ public class AlunoDAO {
         con.close();
         return excluidos;
     }
-
+    
 /*
     public List<AlunoM> listardevedores(String mes) {
 

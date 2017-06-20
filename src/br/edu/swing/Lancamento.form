@@ -67,16 +67,16 @@
                               <Group type="102" attributes="0">
                                   <Component id="jLabelTipo" min="-2" pref="79" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jComboTipo" min="-2" pref="136" max="-2" attributes="0"/>
+                                  <Component id="jComboTipo" min="-2" pref="169" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Component id="jLabelMes" min="-2" pref="44" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="jTextFieldMatricula1" min="-2" pref="79" max="-2" attributes="0"/>
+                                  <Component id="jTextFieldMatriculaValor" min="-2" pref="79" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
                                   <Component id="jLabelMatricula2" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jTextFieldMatricula" min="-2" pref="376" max="-2" attributes="0"/>
+                                  <Component id="jTextFieldComent" min="-2" pref="376" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -97,11 +97,11 @@
                       <Component id="jLabelTipo" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
                       <Component id="jComboTipo" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabelMes" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
-                      <Component id="jTextFieldMatricula1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextFieldMatriculaValor" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jTextFieldMatricula" min="-2" pref="70" max="-2" attributes="0"/>
+                      <Component id="jTextFieldComent" min="-2" pref="70" max="-2" attributes="0"/>
                       <Component id="jLabelMatricula2" min="-2" pref="26" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
@@ -120,9 +120,9 @@
             <Property name="text" type="java.lang.String" value="Tipo"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextFieldMatricula">
+        <Component class="javax.swing.JTextField" name="jTextFieldComent">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldMatriculaActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldComentActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelMes">
@@ -165,9 +165,9 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboTipoActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextFieldMatricula1">
+        <Component class="javax.swing.JTextField" name="jTextFieldMatriculaValor">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldMatricula1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldMatriculaValorActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

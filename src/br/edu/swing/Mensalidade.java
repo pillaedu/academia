@@ -1,13 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package br.edu.swing;
 
 import br.edu.DAO.AlunoDAO;
 import br.edu.dao.PagamentoDAO;
-import br.edu.entity.Alunoold;
+
 
 /**
  *
@@ -194,12 +190,9 @@ public class Mensalidade extends javax.swing.JFrame {
     private void jButtonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarActionPerformed
         // TODO add your handling code here:
         if (jTextFieldMatricula.getText().isEmpty()){
-            br.edu.tools.ExibeMensagens.mostramensagem("Preencha o campo matricula");
+            
         }
-        Alunoold a = new Alunoold();
-        AlunoDAO dao = new AlunoDAO();
-        a = dao.buscar(Integer.parseInt(jTextFieldMatricula.getText()));
-        jTextFieldNome.setText(a.getNome());
+      
     }//GEN-LAST:event_jButtonPesquisarActionPerformed
 
     private void jTextFieldNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomeActionPerformed
