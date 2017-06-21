@@ -2,7 +2,7 @@ package br.edu.entity;
 
 import java.util.Date;
 
-public class Mensalidade {
+public class MensalidadeM {
 	private String mes;
 	private String data_vencimento;
 	private int id_aluno;

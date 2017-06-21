@@ -2,7 +2,11 @@
 package br.edu.swing;
 
 import br.edu.DAO.AlunoDAO;
-import br.edu.dao.PagamentoDAO;
+import br.edu.controller.AlunoC;
+import br.edu.controller.MensalidadeC;
+import br.edu.dao.MensalidadeDAO;
+import br.edu.entity.AlunoM;
+import br.edu.tools.ExibeMensagens;
 
 
 /**
@@ -177,22 +181,28 @@ public class Mensalidade extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldValorActionPerformed
 
     private void jButtonGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGravarActionPerformed
-        br.edu.entity.Mensalidade m = new br.edu.entity.Mensalidade();
-        m.setId_aluno(Integer.parseInt(jTextFieldMatricula.getText()));
-        m.setMes(jComboBox1.getSelectedItem().toString());
-        m.setValor(Float.parseFloat(jTextFieldValor.getText()));
+        MensalidadeC control = new MensalidadeC();
+        control.gravar(jComboBox1.getSelectedItem().toString(), jTextFieldMatricula.getText(),
+                jTextFieldValor.getText());
         
-        PagamentoDAO pdao = new PagamentoDAO();
-        pdao.inserir(m);
-        
+        //limpar campos
+        jComboBox1.setSelectedItem(null);
+        jTextFieldNome.setText(null);
+        jTextFieldMatricula.setText(null);
+        jTextFieldValor.setText(null);
     }//GEN-LAST:event_jButtonGravarActionPerformed
 
     private void jButtonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarActionPerformed
         // TODO add your handling code here:
         if (jTextFieldMatricula.getText().isEmpty()){
-            
+            br.edu.tools.ExibeMensagens msg = new ExibeMensagens();
+            msg.mostramensagem("Preencha a Matrícula");
+        }else{
+            br.edu.controller.AlunoC c = new AlunoC();
+            br.edu.entity.AlunoM m = new AlunoM();
+            m = c.pesquisaraluno(Integer.parseInt(jTextFieldMatricula.getText()));
+            jTextFieldNome.setText(m.getNome());
         }
-      
     }//GEN-LAST:event_jButtonPesquisarActionPerformed
 
     private void jTextFieldNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomeActionPerformed

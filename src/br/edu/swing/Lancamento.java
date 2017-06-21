@@ -144,7 +144,7 @@ public class Lancamento extends javax.swing.JFrame {
     private void jButtonGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGravarActionPerformed
         LancamentoC control = new LancamentoC();
         String tipo = jComboTipo.getSelectedItem().toString();
-        control.incluir(tipo,jTextFieldMatriculaValor.toString(),jTextFieldComent.toString());
+        control.incluir(tipo,jTextFieldMatriculaValor.getText(),jTextFieldComent.getText());
         
     }//GEN-LAST:event_jButtonGravarActionPerformed
 

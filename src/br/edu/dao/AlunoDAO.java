@@ -98,7 +98,24 @@ public class AlunoDAO {
         con.close();
         return excluidos;
     }
-    
+    public int gravarmensalidade(int mes, int id) throws SQLException, ClassNotFoundException{
+        SQLException e = null;
+        int incluido = 0;
+
+        Connection con;
+        con = AppConnection.getConnection();
+        String insert = "insert into vencimento_aluno (id_aluno, mes_vencimento) " 
+                         + "valueS (?,?)";
+
+        PreparedStatement ps = (PreparedStatement) con.prepareStatement(insert);
+
+        ps.setInt(1, id);
+        ps.setInt(2, mes);
+        incluido = ps.executeUpdate();
+        con.close();
+
+        return incluido;
+    }
 /*
     public List<AlunoM> listardevedores(String mes) {
 

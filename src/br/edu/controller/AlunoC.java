@@ -31,6 +31,7 @@ public class AlunoC {
                 idultimo = dao.retornaultimo();
             }
             if (idultimo > 0) {
+                dao.gravarmensalidade(model.getMes(),idultimo);
                 ExibeMensagens m = new ExibeMensagens();
                 m.mostramensagemaluno(idultimo);
             }

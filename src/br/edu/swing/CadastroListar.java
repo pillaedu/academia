@@ -17,6 +17,9 @@ import javax.swing.table.DefaultTableModel;
 import br.edu.controller.AlunoC;
 import br.edu.controller.ProfessorC;
 import br.edu.tools.ExibeMensagens;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -292,7 +295,13 @@ public class CadastroListar extends javax.swing.JFrame {
 
         DefaultTableModel tableaula = (DefaultTableModel) jTableAula.getModel();
         List<AulaM> aulalist = new ArrayList<AulaM>();
-        aulalist = adao.listartodos();
+        try {
+            aulalist = adao.listartodos();
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroListar.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(CadastroListar.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         for (AulaM list1 : aulalist) {
             int i = 0;
