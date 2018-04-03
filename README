@@ -1,2 +1,12 @@
 Projeto realizado em Java swing com banco de dados Mysql.
 Criado para gerir aulas e alunos em uma academia como forma de estudo e aprimoramento de Java com MySql.
+Features:
+O sistema permite o cadastro de professores, alunos e aulas
+O sistema permite a listagem e deleção de professores, alunos e aulas
+O sistema gerencia o recebiento de mensalidades e running costs
+O sistema permite o acompanhamento na evolução das medidas do aluno
+
+Melhorias a implementar:
+Implementar o check in e check out de alunos em aulas
+Implementar relatórios de faturamento
+Implementar relatórios com evolução de alunos.
